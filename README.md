@@ -5,3 +5,14 @@ This project is a React application designed for a technical interview. The main
 ## Task
 
 Create a single UI that consumes the endpoint `GET /events` from the backend API provided and shows a list of events returned by the API with the information of each event. Use components from MUI to create the UI.
+
+- Use MUI to build a simple UI
+- The UI should be responsive
+- Use Redux as a store management
+
+Create a form to update a settings object in the provided API (This API is part of the backend test)
+
+- Use MUI to build a simple Form
+- The UI should be responsive
+- Use Redux as a store management
+- Use formkit as the form components
