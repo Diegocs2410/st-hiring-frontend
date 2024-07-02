@@ -15,4 +15,4 @@ Create a form to update a settings object in the provided API (This API is part 
 - Use MUI to build a simple Form
 - The UI should be responsive
 - Use Redux as a store management
-- Use formkit as the form components
+- Use formik as the form components
