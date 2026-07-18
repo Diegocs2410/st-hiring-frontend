@@ -28,6 +28,15 @@ All dependencies are already installed — no need to add them.
 
 The Vite dev server proxies `/events` and `/settings` to the backend automatically, so no extra configuration is needed.
 
+### Useful scripts
+
+```bash
+yarn dev      # start Vite on http://localhost:5173
+yarn test     # run Vitest unit tests
+yarn build    # typecheck + production build
+yarn lint     # ESLint
+```
+
 ## Tasks
 
 ### 1. Events list
@@ -46,3 +55,12 @@ Build a form that reads and updates a settings object via the backend API (`GET 
 - The layout should be responsive
 - Use Redux to manage the settings state
 - Use Formik for the form and Yup for validation
+
+## Solution notes
+
+- Feature folders under `src/features` for events and settings
+- Redux Toolkit slices with `createAsyncThunk` for remote state
+- Settings drive event cards (`defaultCurrency`, ticket display flags) and the AppBar `siteName`
+- API layer normalizes snake_case / camelCase event payloads from the backend
+- Yup schema lives in `settings-schema.ts` and is covered by Vitest
+- Tabs only mount the active page so events are not fetched until needed
