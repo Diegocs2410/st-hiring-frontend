@@ -26,6 +26,30 @@ interface RawEvent {
 	updatedAt?: string
 }
 
+export interface EventsQuery {
+	page: number
+	limit: number
+	q?: string
+}
+
+export interface EventsPage {
+	items: Event[]
+	page: number
+	limit: number
+	total: number
+	totalPages: number
+	q?: string
+}
+
+interface RawEventsPage {
+	items: RawEvent[]
+	page: number
+	limit: number
+	total: number
+	totalPages: number
+	q?: string
+}
+
 function normalizeTicket (ticket: RawTicket): Ticket {
 	return {
 		id: ticket.id,
@@ -60,10 +84,27 @@ async function parseJson <T>(response: Response): Promise<T> {
 	return response.json() as Promise<T>
 }
 
-export async function fetchEvents (): Promise<Event[]> {
-	const response = await fetch('/events')
-	const data = await parseJson<RawEvent[]>(response)
-	return data.map(normalizeEvent)
+export async function fetchEvents (query: EventsQuery): Promise<EventsPage> {
+	const params = new URLSearchParams({
+		page: String(query.page),
+		limit: String(query.limit),
+	})
+
+	if (query.q?.trim()) {
+		params.set('q', query.q.trim())
+	}
+
+	const response = await fetch(`/events?${params.toString()}`)
+	const data = await parseJson<RawEventsPage>(response)
+
+	return {
+		items: data.items.map(normalizeEvent),
+		page: data.page,
+		limit: data.limit,
+		total: data.total,
+		totalPages: data.totalPages,
+		q: data.q,
+	}
 }
 
 export async function fetchSettings (): Promise<Settings> {

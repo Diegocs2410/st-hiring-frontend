@@ -64,3 +64,9 @@ Build a form that reads and updates a settings object via the backend API (`GET 
 - API layer normalizes snake_case / camelCase event payloads from the backend
 - Yup schema lives in `settings-schema.ts` and is covered by Vitest
 - Tabs only mount the active page so events are not fetched until needed
+
+## Improvements branch (`feature/interview-improvements`)
+
+- Events search with debounce (`q`) and MUI pagination
+- Consumes paginated backend response (`items`, `total`, `totalPages`)
+- Settings Save button disabled when Formik `dirty` is false

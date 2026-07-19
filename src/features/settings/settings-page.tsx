@@ -102,7 +102,7 @@ export function SettingsPage () {
 				validationSchema={settingsSchema}
 				onSubmit={handleSubmit}
 			>
-				{({ values, errors, touched, isSubmitting, setFieldValue }) => (
+				{({ values, errors, touched, isSubmitting, dirty, setFieldValue }) => (
 					<Form>
 						<Stack spacing={3} maxWidth={560}>
 							<Field name="siteName">
@@ -285,7 +285,9 @@ export function SettingsPage () {
 								<Button
 									type="submit"
 									variant="contained"
-									disabled={isSubmitting || saveStatus === 'loading'}
+									disabled={
+										!dirty || isSubmitting || saveStatus === 'loading'
+									}
 								>
 									{saveStatus === 'loading' ? 'Saving…' : 'Save settings'}
 								</Button>
